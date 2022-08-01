@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.7.0) (token/ERC20/ERC20.sol)
+// OpenZeppelin Contracts (last updated v4.7.0) (token/OZ/OZ.sol)
 
 pragma solidity ^0.8.0;
 
@@ -20,7 +20,7 @@ import "./Context.sol";
  *
  * We have followed general OpenZeppelin Contracts guidelines: functions revert
  * instead returning `false` on failure. This behavior is nonetheless
- * conventional and does not conflict with the expectations of ERC20
+ * conventional and does not conflict with the expectations of OZ
  * applications.
  *
  * Additionally, an {Approval} event is emitted on calls to {transferFrom}.
@@ -77,7 +77,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * be displayed to a user as `5.05` (`505 / 10 ** 2`).
      *
      * Tokens usually opt for a value of 18, imitating the relationship between
-     * Ether and Wei. This is the value {ERC20} uses, unless this function is
+     * Ether and Wei. This is the value {OZ} uses, unless this function is
      * overridden;
      *
      * NOTE: This information is only used for _display_ purposes: it in
@@ -143,7 +143,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * @dev See {IERC20-transferFrom}.
      *
      * Emits an {Approval} event indicating the updated allowance. This is not
-     * required by the EIP. See the note at the beginning of {ERC20}.
+     * required by the EIP. See the note at the beginning of {OZ}.
      *
      * NOTE: Does not update the allowance if the current allowance
      * is the maximum `uint256`.
@@ -256,20 +256,26 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      *
      * - `account` cannot be the zero address.
      */
-    function _mint(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: mint to the zero address");
 
-        _beforeTokenTransfer(address(0), account, amount);
 
-        _totalSupply += amount;
-    unchecked {
-        // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
-        _balances[account] += amount;
-    }
-        emit Transfer(address(0), account, amount);
 
-        _afterTokenTransfer(address(0), account, amount);
-    }
+                    function _mint(address account, uint256 amount) internal virtual {
+                        require(account != address(0), "ERC20: mint to the zero address");
+
+                        _beforeTokenTransfer(address(0), account, amount);
+
+                        _totalSupply += amount;
+                        unchecked {
+                        // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
+                        _balances[account] += amount;
+                    }
+                        emit Transfer(address(0), account, amount);
+
+                        _afterTokenTransfer(address(0), account, amount);
+                    }
+
+
+
 
     /**
      * @dev Destroys `amount` tokens from `account`, reducing the
